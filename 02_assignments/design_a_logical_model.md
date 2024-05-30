@@ -16,6 +16,7 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 Bonus: Are there privacy implications to this, why or why not?
 ```
 Your answer...
+There are privacy implications, because address is PII (Personal Identification Information).  And we are directly associating that with the customer's name.
 ```
 
 ## Question 4
@@ -24,6 +25,12 @@ Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
 Highlight at least two differences between it and your ERD. Would you change anything in yours?
 ```
 Your answer...
+Differences between AdventureWorks Schema and mine:
+1. all tables in the AdventureWorks Schema has the ModifiedDate column
+2. All tables in the AdventureWorks Schema has an ID column as a primary key
+3. Many tables in the AdventureWorks Schema has a unique key to uniquely identify a row in the table.
+
+I would implement the above in my schema.  The ModifiedDate column can clearly identify when a change was made in any of the data.  The ID column as a primary key will facilitate the use of foreign key relationships between tables.  The unique keys will add business logic to the design.  
 ```
 
 # Criteria
