@@ -13,9 +13,14 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 
 _Hint, search type 1 vs type 2 slowly changing dimensions._
 
+The customer_address table in type1 does not allow more than one entry for each customer_id.  Each row is only uniquely identified by the customer_id column.  Hence when an existing customer address is updated, the existing row has to be updated and the old data is not retained.
+
+On the other hand, the customer_address table in the type2 design has a date_updated column, as well as an is_current column (meant to store a boolean value).  This way, when an existing customer with an existing address needs to update their address, a new row can be inserted into the table, with date_updated as the current time, and is_current value set to true.  At the same time, the old entry needs to have the is_current value updated to false.  That row remains in the table.  The columns that uniquely identify a row in the table would be customer_id and date_updated.
+
 Bonus: Are there privacy implications to this, why or why not?
 ```
 Your answer...
+There are privacy implications, because address is PII (Personal Identification Information).  And we are directly associating that with the customer's name.
 ```
 
 ## Question 4
@@ -24,6 +29,12 @@ Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
 Highlight at least two differences between it and your ERD. Would you change anything in yours?
 ```
 Your answer...
+Differences between AdventureWorks Schema and mine:
+1. all tables in the AdventureWorks Schema has the ModifiedDate column
+2. All tables in the AdventureWorks Schema has an ID column as a primary key
+3. Many tables in the AdventureWorks Schema has a unique key to uniquely identify a row in the table.
+
+I would implement the above in my schema.  The ModifiedDate column can clearly identify when a change was made in any of the data.  The ID column as a primary key will facilitate the use of foreign key relationships between tables.  The unique keys will add business logic to the design.  
 ```
 
 # Criteria
