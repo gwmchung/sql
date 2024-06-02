@@ -13,6 +13,10 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 
 _Hint, search type 1 vs type 2 slowly changing dimensions._
 
+The customer_address table in type1 does not allow more than one entry for each customer_id.  Each row is only uniquely identified by the customer_id column.  Hence when an existing customer address is updated, the existing row has to be updated and the old data is not retained.
+
+On the other hand, the customer_address table in the type2 design has a date_updated column, as well as an is_current column (meant to store a boolean value).  This way, when an existing customer with an existing address needs to update their address, a new row can be inserted into the table, with date_updated as the current time, and is_current value set to true.  At the same time, the old entry needs to have the is_current value updated to false.  That row remains in the table.  The columns that uniquely identify a row in the table would be customer_id and date_updated.
+
 Bonus: Are there privacy implications to this, why or why not?
 ```
 Your answer...
